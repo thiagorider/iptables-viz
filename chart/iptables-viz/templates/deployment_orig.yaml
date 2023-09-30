@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iptables-viz-backend
+  namespace: iptables-viz
+  labels:
+    app: iptables-viz-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iptables-viz-backend
+  template:
+    metadata:
+      labels:
+        app: iptables-viz-backend
+    spec:
+      containers:
+        - name: iptables-viz-backend
+          image: iptablesviz/iptables-viz-backend:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      serviceAccountName: iptables-viz-backend-sa
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iptables-viz-frontend
+  namespace: iptables-viz
+  labels:
+    app: iptables-viz-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iptables-viz-frontend
+  template:
+    metadata:
+      labels:
+        app: iptables-viz-frontend
+    spec:
+      containers:
+        - name: iptables-viz-frontend
+          image: iptablesviz/iptables-viz-frontend:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      serviceAccountName: iptables-viz-frontend-sa

@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "iptables-viz.fullname" . }}-frontend-role
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "iptables-viz.labels" . | nindent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    resourceNames: ["{{ include "iptables-viz.fullname" . }}-backend-svc"]
+    verbs: ["get", "list"]

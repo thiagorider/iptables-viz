@@ -1,0 +1,6 @@
+apiVersion: v2
+name: iptables-viz
+description: A Helm chart for iptables-viz. A simple and scalable iptables visualization tool which can be used across Kubernetes and Linux.
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
